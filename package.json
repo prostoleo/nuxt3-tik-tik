@@ -14,6 +14,7 @@
     "@mdi/font": "^6.9.96",
     "@nuxtjs/sanity": "^1.2.3",
     "@pinia/nuxt": "^0.2.0",
+    "@sanity/client": "^3.3.2",
     "bootstrap-icons": "^1.9.0",
     "pinia": "^2.0.15",
     "sass": "^1.53.0",

@@ -99,18 +99,28 @@ export default defineNuxtConfig({
 		// '',
 	],
 
-	// modules: ['@nuxtjs/sanity'],
+	typescript: {
+		typeCheck: true,
+	},
+
+	modules: ['@nuxtjs/sanity'],
 	buildModules: ['nuxt-windicss', '@pinia/nuxt'],
 
 	runtimeConfig: {
-		sanity: {
-			projectId: process.env.NUXT_SANITY_ID,
+		secretKey: '', // variable that can only be accessed on the server side
+		public: {
+			SANITY_ID: process.env.SANITY_ID, // variable that can also be accessed on the client side
+			// SANITY_DATASET: process.env.SANITY_DATASET, // variable that can also be accessed on the client side
+			SANITY_PUBLIC_TOKEN: process.env.SANITY_PUBLIC_TOKEN,
 		},
 	},
 
 	sanity: {
-		projectId: process.env.NUXT_SANITY_ID,
+		projectId: process.env.SANITY_ID,
 		dataset: 'production',
+		useCdn: true,
+		token: process.env.SANITY_PUBLIC_TOKEN,
+		globalHelper: true,
 	},
 
 	vite: {
