@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "nuxt": "3.0.0-rc.4",
+    "nuxt-windicss": "^2.4.3"
+  },
+  "dependencies": {
+    "@mdi/font": "^6.9.96",
+    "@nuxtjs/sanity": "^1.2.3",
+    "@pinia/nuxt": "^0.2.0",
+    "bootstrap-icons": "^1.9.0",
+    "pinia": "^2.0.15",
+    "sass": "^1.53.0",
+    "uuid": "^8.3.2",
+    "vue-material-design-icons": "^5.1.2"
+  }
+}
