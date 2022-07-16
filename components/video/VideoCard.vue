@@ -35,18 +35,68 @@
 
 		<div class="lg:(ml-20) flex gap-4 relative">
 			<div
-				class="rounded-3xl"
+				class="rounded-3xl relative"
 				@mouseover="isHover = true"
 				@mouseleave="isHover = false"
 			>
 				<NuxtLink to="/">
 					<video
+						ref="videoRef"
 						class="h-[300px] w-[200px] rounded-2xl cursor-pointer bg-gray-100 md:(h-[400px]) lg:(w-[600px] h-[530px])"
 						loop
 						:src="post.video.asset.url"
 					></video>
 				</NuxtLink>
-				<!-- <div v-if="isHover"></div> -->
+				<div
+					v-if="isHover"
+					class="absolute bottom-6 cursor-pointer left-50/100 transform -translate-x-1/2 flex gap-10 md:() lg:(left-0 justify-between)"
+				>
+					<template v-if="playing">
+						<button aria-label="pause video" @click="onVideoPress">
+							<span
+								class="mdi mdi-pause text-black text-2xl lg:(text-4xl)"
+							></span>
+						</button>
+					</template>
+					<template v-else>
+						<button aria-label="play video" @click="onVideoPress">
+							<span
+								class="mdi mdi-play text-black text-2xl lg:(text-4xl)"
+							></span>
+						</button>
+					</template>
+					<template v-if="isVideoMuted">
+						<button aria-label="turn on volume" @click="isVideoMuted = false">
+							<span
+								class="mdi mdi-volume-off text-black text-2xl lg:(text-4xl)"
+							></span>
+						</button>
+					</template>
+					<template v-else>
+						<button aria-label="turn off volume" @click="isVideoMuted = true">
+							<span
+								class="mdi mdi-volume-high text-black text-2xl lg:(text-4xl)"
+							></span>
+						</button>
+					</template>
+				</div>
+				<!-- <div v-if="isHover">
+					<template v-if="playing">
+						<button>
+							<span
+								class="mdi mdi-pause text-black text-2xl lg:(text-4xl)"
+							></span>
+						</button>
+					</template>
+					<template v-else-if="!playing">
+						<button>
+							<span
+								class="mdi mdi-play text-black text-2xl lg:(text-4xl)"
+							></span>
+						</button>
+					</template>
+					
+				</div> -->
 			</div>
 		</div>
 	</div>
@@ -59,8 +109,34 @@
 		post: IPost;
 	}>();
 
+	const videoRef = ref<HTMLVideoElement>(null);
+
 	const isHover = ref(false);
 	const playing = ref(false);
+	const isVideoMuted = ref(false);
+
+	onMounted(() => {
+		// console.log('videoRef: ', videoRef);
+	});
+
+	function onVideoPress(): void {
+		if (!process.client) return;
+
+		if (playing.value) {
+			videoRef?.value?.pause();
+
+			playing.value = false;
+		} else {
+			videoRef?.value?.play();
+			playing.value = true;
+		}
+	}
+
+	watch(isVideoMuted, () => {
+		if (videoRef?.value) {
+			videoRef.value.muted = isVideoMuted.value;
+		}
+	});
 </script>
 
 <style scoped></style>
