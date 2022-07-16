@@ -15,7 +15,26 @@
 	</div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+	import { useUserStore } from '~~/store/user';
+
+	const userStore = useUserStore();
+
+	/* const config = useRuntimeConfig();
+	const userCookie = useCookie(config.public.USER_KEY);
+	// const userCookie = useState('userCookie')
+	userCookie.value = userCookie.value || null;
+	console.log('userCookie: ', userCookie); */
+
+	/* const { getUserCookie, setUserCookie, clearUserCookie } = useCookieUser();
+	setUserCookie({ c: 7, leo: 999 });
+
+	setTimeout(() => {
+		clearUserCookie();
+	}, 10000); */
+
+	// userStore.setUserFromCookie(JSON.parse(unref(userCookie)));
+</script>
 
 <style lang="scss" scoped>
 	.website-wrapper {
