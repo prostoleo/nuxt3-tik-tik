@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
 					.commit()
 			: await sanityClient
 					.patch(postId)
-					.unset([groq`likes[_ref=="${userId}"]`])
+					.unset([`likes[_ref=="${userId}"]`])
 					.commit();
 		// console.log('res: ', res);
 		// .then(() => res.status(200).json('Login success')))

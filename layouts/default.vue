@@ -3,7 +3,7 @@
 		<div class="m-auto overflow-hidden h-screen xl:(w-7xl)">
 			<Navbar />
 			<main class="flex gap-6 md:(gap-20)">
-				<div class="h-[90vh] overflow-hidden xl:(overflow-auto)">
+				<div class="h-[90vh] overflow-hidden xl:(overflow-y-auto)">
 					<Sidebar />
 				</div>
 				<div

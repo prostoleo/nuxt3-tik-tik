@@ -1,6 +1,6 @@
 // export const allPostsQuery = () => {};
 
-export const allPostsQuery = groq`*[_type == "post"] | order(_createdAt desc){
+export const allPostsQuery = `*[_type == "post"] | order(_createdAt desc){
   _id,
    caption,
      video{
@@ -30,7 +30,7 @@ export const allPostsQuery = groq`*[_type == "post"] | order(_createdAt desc){
 // return query;
 
 export const postDetailQuery = (postId: string | string[]) => {
-	const query = groq`*[_type == "post" && _id == '${postId}']{
+	const query = `*[_type == "post" && _id == '${postId}']{
     _id,
      caption,
        video{
@@ -59,7 +59,7 @@ export const postDetailQuery = (postId: string | string[]) => {
 };
 
 export const searchPostsQuery = (searchTerm: string | string[]) => {
-	const query = groq`*[_type == "post" && caption match '${searchTerm}*' || topic match '${searchTerm}*'] {
+	const query = `*[_type == "post" && caption match '${searchTerm}*' || topic match '${searchTerm}*'] {
     _id,
      caption,
        video{
@@ -89,7 +89,7 @@ likes,
 };
 
 export const singleUserQuery = (userId: string | string[]) => {
-	const query = groq`*[_type == "user" && _id == '${userId}']`;
+	const query = `*[_type == "user" && _id == '${userId}']`;
 
 	return query;
 };

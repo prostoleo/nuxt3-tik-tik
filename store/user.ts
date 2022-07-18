@@ -46,17 +46,21 @@ export const useUserStore = defineStore('user', {
 		// userCookie: userCookie,
 		// JSON.parse(localStorage.getItem(LS_USER_KEY)) ??
 		user: null as IUser | null,
-		allUsers: [],
+		allUsers: [] as IUser[] | [],
 		//  JSON.parse(localStorage.getItem(LS_USER_KEY)) ? true :
 		isLogin: false,
 	}),
 	getters: {
 		getUser: (state) => {
-			console.log(useFetch);
+			// console.log(useFetch);
 			// autocompletion! ✨
 			// if (!state.isLogin) return null;
 
 			return state.user;
+		},
+
+		getAllUsers: (state) => {
+			return state.allUsers;
 		},
 	},
 	actions: {
@@ -128,6 +132,8 @@ export const useUserStore = defineStore('user', {
 				if (error.value) {
 					throw new Error(error.value);
 				}
+
+				this.allUsers = data.value.body;
 
 				return data;
 			} catch (error) {
