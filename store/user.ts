@@ -46,11 +46,13 @@ export const useUserStore = defineStore('user', {
 		// userCookie: userCookie,
 		// JSON.parse(localStorage.getItem(LS_USER_KEY)) ??
 		user: null as IUser | null,
+		allUsers: [],
 		//  JSON.parse(localStorage.getItem(LS_USER_KEY)) ? true :
 		isLogin: false,
 	}),
 	getters: {
 		getUser: (state) => {
+			console.log(useFetch);
 			// autocompletion! ✨
 			// if (!state.isLogin) return null;
 
@@ -114,5 +116,24 @@ export const useUserStore = defineStore('user', {
       // you can directly mutate the state
       this.todos.push({ text, id: this.nextId++, isFinished: false })
     }, */
+		async fetchAllUsers() {
+			try {
+				const { data, error, pending, refresh } = await useFetch(`/api/users`, {
+					method: 'GET',
+					/* body: {
+						user: rawUser,
+					}, */
+				});
+
+				if (error.value) {
+					throw new Error(error.value);
+				}
+
+				return data;
+			} catch (error) {
+				console.log('error: ', error);
+				throw error;
+			}
+		},
 	},
 });

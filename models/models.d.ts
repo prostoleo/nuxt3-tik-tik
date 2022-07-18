@@ -1,3 +1,5 @@
+import { Ref } from 'vue';
+
 export interface IPostedBy {
 	_id: string;
 	image: string;
@@ -29,6 +31,17 @@ export interface IPost {
 			url: string;
 		};
 	};
+}
+
+export interface ICommentData {
+	userId: string;
+	comment: string;
+}
+
+export interface ILikeData {
+	userId: Ref<string> | string;
+	postId: Ref<string> | string;
+	like: Ref<boolean> | boolean;
 }
 
 //* how to quickly create type - timestamp 7:37 - https://www.youtube.com/watch?v=tZK7vZifPp0
