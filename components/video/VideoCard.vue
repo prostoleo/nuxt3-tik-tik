@@ -39,7 +39,7 @@
 				@mouseover="isHover = true"
 				@mouseleave="isHover = false"
 			>
-				<NuxtLink to="/">
+				<NuxtLink :to="`/details/${post._id}`">
 					<video
 						ref="videoRef"
 						class="h-[300px] w-[200px] rounded-2xl cursor-pointer bg-gray-100 md:(h-[400px]) lg:(w-[600px] h-[530px])"
