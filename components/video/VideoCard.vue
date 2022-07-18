@@ -49,7 +49,7 @@
 				</NuxtLink>
 				<div
 					v-if="isHover"
-					class="absolute bottom-6 cursor-pointer left-50/100 transform -translate-x-1/2 flex gap-10 md:() lg:(left-0 justify-between)"
+					class="absolute bottom-6 cursor-pointer left-50/100 transform -translate-x-1/2 flex gap-10 md:() lg:(justify-between)"
 				>
 					<template v-if="playing">
 						<button aria-label="pause video" @click="onVideoPress">

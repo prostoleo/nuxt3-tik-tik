@@ -3,7 +3,7 @@ import { useSanityClient } from '~~/utils/sanityClient';
 export default defineEventHandler(async (event) => {
 	try {
 		const body = await useBody(event);
-		const { user } = body;
+		const { document } = body;
 		const config = useRuntimeConfig();
 
 		// const sanity = useSanity();
@@ -15,11 +15,11 @@ export default defineEventHandler(async (event) => {
 
 		const sanityClient = useSanityClient(config);
 
-		const res = await sanityClient.createIfNotExists(user);
+		const res = await sanityClient.create(document);
 		console.log('res: ', res);
 		// .then(() => res.status(200).json('Login success')))
 		return {
-			statusCode: 200,
+			statusCode: 201,
 			headers: {
 				'Content-Type': 'application/json; charset=utf-8',
 			},

@@ -14,14 +14,37 @@
 
 		<div>
 			<template v-if="userComputed">
-				<div>
-					{{ userStore.getUser.userName }}
-					<img :src="userStore.getUser.image" />
+				<div class="flex gap-5 items-center md:(gap-10)">
+					<NuxtLink to="/upload">
+						<button
+							class="border-2 px-2 text-md font-semibold flex items-center gap-2 md:(px-4)"
+						>
+							<span class="mdi mdi-plus text-xl"></span>
+							<span class="hidden md:(block)">Upload</span>
+						</button>
+					</NuxtLink>
+					<!-- {{ userStore.getUser.userName }} -->
+					<template v-if="userStore.getUser.image">
+						<NuxtLink class="block w-full h-full" to="/">
+							<img
+								:src="userStore.getUser.image"
+								class="block w-full h-full object-cover rounded-full aspect-square w-10 h-10 cursor-pointer"
+								:alt="`photo of ${userStore.getUser.userName}'s profile`"
+							/>
+							<!-- width="62" -->
+							<!-- height="62" -->
+						</NuxtLink>
+					</template>
+					<button class="px-2" type="button" @click="handleLogout">
+						<span class="mdi mdi-logout text-red-400 text-2xl"></span>
+					</button>
+					<!-- <img  :src="userStore.getUser.image" /> -->
 				</div>
 			</template>
 			<template v-else>
 				<div>
 					<GoogleLogin
+						ref="googleLoginEl"
 						:clientId="config.public.GOOGLE_API_CLIENT_ID"
 						:callback="handleLogin"
 						:error="userStore.handleError"
@@ -49,33 +72,30 @@
 	// import  '*.png' from './index.d.ts';
 	import Logo from '/tiktik-logo.png';
 	// console.log('GoogleLogin: ', GoogleLogin);
-	// console.log('GoogleLogin: ', GoogleLogin);
-	// console.log('sanityClient: ', sanityClient);
-	// console.log('clientSanity: ', clientSanity);
+
+	onMounted(() => {
+		const gBtnWrapper = document
+			?.querySelector('.api-loading')
+			?.classList?.remove('api-loading');
+	});
 
 	const config = useRuntimeConfig();
 
 	const { getUserCookie, setUserCookie, clearUserCookie } = useCookieUser();
-	// console.log('userCookie: ', userCookie);
-	// console.log('getUserCookie.: ', getUserCookie);
-
-	// const sanity = useSanity();
-	// console.log('sanity: ', sanity);
 	const userStore = useUserStore();
 	const userComputed = computed(() => userStore.getUser);
 	const clientSanity = useSanityClient(config);
-	// console.log('clientSanity: ', clientSanity);
 
 	watch(
 		getUserCookie,
 		(newVal) => {
-			console.log('newVal: ', newVal);
-			console.log(typeof newVal);
+			// console.log('newVal: ', newVal);
+			// console.log(typeof newVal);
 			if (newVal) {
-				console.log(`newVal truthy - setUser`);
+				// console.log(`newVal truthy - setUser`);
 				userStore.setUserFromCookieUser(newVal);
 			} else {
-				console.log(`newVal falsy - clearUser`);
+				// console.log(`newVal falsy - clearUser`);
 				userStore.clearUser();
 			}
 		},

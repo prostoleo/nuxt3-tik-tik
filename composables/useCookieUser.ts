@@ -9,7 +9,7 @@ export function useCookieUser() {
 	// console.log('useCookie: ', useCookie);
 
 	const userCookie = useCookie(config.public.USER_KEY);
-	console.log('userCookie.value: ', userCookie.value);
+	// console.log('userCookie.value: ', userCookie.value);
 	userCookie.value = userCookie.value || null;
 
 	/* const userCookie = useCookie(config.public.USER_KEY);
@@ -26,7 +26,7 @@ export function useCookieUser() {
 	// userCookie.value = userCookie.value || null;
 
 	const getUserCookie = computed(() => {
-		console.log('userCookie.value : ', userCookie.value);
+		// console.log('userCookie.value : ', userCookie.value);
 		// return userCookie.value ? JSON.parse(userCookie.value) : null;
 
 		return userCookie.value;
