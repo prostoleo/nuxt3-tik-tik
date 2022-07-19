@@ -3,7 +3,7 @@
 		<div v-if="!postDetails">Oopsy</div>
 		<div
 			v-if="postDetails"
-			class="flex w-full h-full absolute left-0 top-0 bottom-0 bg-white flex-wrap lg:(flex-wrap)"
+			class="flex w-full h-full absolute left-0 top-0 bottom-0 bg-white flex-wrap lg:(flex-nowrap)"
 		>
 			<!-- <pre>{{ postDetails }}</pre> -->
 			<div
@@ -120,7 +120,7 @@
 						<!-- <Comments/> -->
 					</div>
 					<DetailsComments
-						class="px-10"
+						class="relative transform transition-transform duration-300 <lg:(pb-20) <lg:hover:(transform transition-transform duration-300 -translate-y-70/100)"
 						@add-comment="addComment"
 						:is-posting-comment="isPostingComment"
 						:comments="post.comments"

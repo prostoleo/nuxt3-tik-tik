@@ -30,29 +30,29 @@ export const allPostsQuery = `*[_type == "post"] | order(_createdAt desc){
 // return query;
 
 export const postDetailQuery = (postId: string | string[]) => {
-	const query = `*[_type == "post" && _id == '${postId}']{
+	const query = `*[_type == "post" && _id == '${postId}'] | order(comment._createdAt desc){
     _id,
-     caption,
-       video{
-        asset->{
-          _id,
-          url
-        }
-      },
-      userId,
+    caption,
+    video{
+      asset->{
+        _id,
+        url
+      }
+    },
+    userId,
     postedBy->{
       _id,
       userName,
       image
     },
-     likes,
+    likes,
     comments[]{
       comment,
       _key,
       postedBy->{
         _ref,
-      _id,
-    },
+        _id,
+      },
     }
   }`;
 	return query;

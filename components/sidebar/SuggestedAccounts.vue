@@ -40,7 +40,7 @@
 	const users = ref<IUser[] | []>([]);
 	const userStore = useUserStore();
 	const usersFetched = await userStore.fetchAllUsers();
-	console.log('usersFetched: ', usersFetched);
+	// console.log('usersFetched: ', usersFetched);
 	users.value = userStore.getAllUsers;
 	console.log('users: ', users);
 
