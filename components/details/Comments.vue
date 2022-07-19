@@ -1,9 +1,30 @@
 <template>
-	<div>
+	<div
+		ref="wrapperEl"
+		class="relative transform transition-transform duration-300 pb-28 lg:(pb-0)"
+		:class="{
+			'transform transition-transform duration-300 -translate-y-70/100':
+				showCommentsComputed,
+		}"
+		@click.capture="handleWrapperClick"
+	>
+		<!-- @pointerleave="pointerOver = false"
+		@pointerout="pointerOver = false"
+		@pointerenter.prevent="pointerOver = true"
+		@pointerover.prevent="pointerOver = true"
+		@pointerdown.prevent="pointerOver = true" -->
+
+		<!-- active:(transform transition-transform duration-300 -translate-y-70/100) hover:(transform transition-transform duration-300 -translate-y-70/100) -->
+		<!-- :class="{
+			'transform transition-transform duration-300 -translate-y-70/100':
+				showCommentsComputed || show,
+		}" -->
+		<!-- @poinetleave.capture="pointerOver = false" -->
+		<!-- @pointerover.capture="pointerOver = true" -->
 		<div
-			class="border-t-2 border-b-2 border-gray-200 bg-light-300 px-10 pb-28 lg:(pb-0) overflow-y-scroll"
+			class="border-t-2 border-b-2 border-gray-200 bg-light-300 px-2 md:(px-10) pb-28 lg:(pb-0) overflow-y-scroll"
 		>
-			<div class="h-72 lg:(h-lg)">
+			<div class="h-72 max-h-[75vh] lg:(h-lg max-h-full)">
 				<template v-if="comments?.length" class="">
 					<div v-for="(item, idx) in comments" :key="item.key">
 						<template v-for="user in userStore.getAllUsers" :key="user._id">
@@ -14,7 +35,7 @@
 								<NuxtLink :to="`/profile/${user._id}`">
 									<!-- rounded hover:(bg-primary) -->
 									<div
-										class="flex gap-3 items-center p-2 font-semibold cursor-pointer"
+										class="inline-flex gap-3 items-center p-2 font-semibold cursor-pointer"
 									>
 										<div class="w-8 h-8">
 											<img
@@ -48,19 +69,24 @@
 		</div>
 		<div
 			v-if="userStore.getUser"
-			class="fixed absolute bottom-0 left-0 left-0 pb-2 px-2 md:(px-10) lg:(absolute)"
+			class="absolute bottom-0 left-0 pb-2 px-2 md:(px-10) lg:(absolute)"
 		>
-			<form class="flex gap-4" @submit.prevent="addComment">
+			<form
+				class="flex flex-wrap gap-2 md:(gap-4)"
+				@submit.prevent="addComment"
+			>
 				<input
-					class="bg-primary px-6 py-4 font-medium border-2 border-gray-100 w-64 md:(w-3xl) lg:(w-72) focus:(border-accent/50 outline-none) flex-1 rounded-lg"
+					class="bg-primary px-6 py-4 font-medium border-2 border-gray-100 w-64 max-w-60/100 md:(w-3xl) lg:(w-72) focus:(border-accent/50 outline-none) flex-1 rounded-lg"
 					type="text"
 					v-model.trim="newComment"
 					placeholder="add comment"
 				/>
-				<button aria-label="submit comment" @click="addComment">
-					<span>
-						{{ isPostingComment ? 'Commenting..' : 'Comment' }}
-					</span>
+				<button
+					class="border-2 border-accent/70 px-2 rounded-lg transition-colors hover:(bg-accent/70 text-white)"
+					aria-label="submit comment"
+					@click="addComment"
+				>
+					{{ isPostingComment ? 'Commenting..' : 'Comment' }}
 				</button>
 			</form>
 		</div>
@@ -95,6 +121,24 @@
 	function addComment() {
 		emit('add-comment', newComment.value);
 		newComment.value = '';
+	}
+
+	const pointerOver = ref(false);
+	const showCommentsComputed = computed(
+		() => process.client && window.innerWidth <= 1024 && pointerOver.value
+	);
+	// const show = ref(false);
+	const wrapperEl = ref<HTMLDivElement | null>(null);
+
+	function handleWrapperClick(event: Event) {
+		console.log('event.target: ', event.target);
+		if (
+			!event?.target?.matches('input') &&
+			!event?.target.matches('a') &&
+			!event?.target?.matches('button')
+		) {
+			pointerOver.value = !pointerOver.value;
+		}
 	}
 </script>
 

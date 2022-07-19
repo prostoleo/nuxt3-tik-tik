@@ -78,7 +78,10 @@
 				<div class="mt-5 lg:(mt-20)">
 					<div class="flex gap-3 p-2 cursor-pointer font-semibold rounded">
 						<div class="w-12 h-12 md:(w-16 h-16)">
-							<NuxtLink class="block w-full h-full" to="/">
+							<NuxtLink
+								class="block w-full h-full"
+								:to="`/profile/${post.postedBy._id}`"
+							>
 								<img
 									:src="post.postedBy.image"
 									class="block w-full h-full object-cover rounded-full aspect-square"
@@ -89,7 +92,7 @@
 							</NuxtLink>
 						</div>
 						<div>
-							<NuxtLink to="/">
+							<NuxtLink :to="`/profile/${post.postedBy._id}`">
 								<div class="flex flex-col gap-2 mt-2">
 									<p
 										class="flex gap-2 items-center font-bold text-primary md:(text-md)"
@@ -120,11 +123,11 @@
 						<!-- <Comments/> -->
 					</div>
 					<DetailsComments
-						class="relative transform transition-transform duration-300 <lg:(pb-20) <lg:hover:(transform transition-transform duration-300 -translate-y-70/100)"
 						@add-comment="addComment"
 						:is-posting-comment="isPostingComment"
 						:comments="post.comments"
 					/>
+					<!-- @pointer -->
 					<!-- :comment="comment" -->
 				</div>
 			</div>
