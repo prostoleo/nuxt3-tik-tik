@@ -138,7 +138,7 @@
 		const fileTypes = ['video/mp4', 'video/webm', 'video/ogg'];
 
 		if (fileTypes.includes(selectedFile.type)) {
-			console.log(`include`);
+			// console.log(`include`);
 			// client.assets
 			sanity.client.assets
 				.upload('file', selectedFile, {
@@ -146,7 +146,7 @@
 					filename: selectedFile.name,
 				})
 				.then((data) => {
-					console.log('data: ', data);
+					// console.log('data: ', data);
 					videoAsset.value = data;
 					isLoading.value = false;
 				});
@@ -154,7 +154,7 @@
 						console.log(err);
 					}); */
 		} else {
-			console.log(`error`);
+			// console.log(`error`);
 			isLoading.value = false;
 			wrongFileType.value = true;
 		}
@@ -179,7 +179,7 @@
 			savingPost.value = true;
 
 			const userData = toRaw(userStore.getUser);
-			console.log('userData: ', userData);
+			// console.log('userData: ', userData);
 
 			const document = {
 				_type: 'post',
@@ -205,7 +205,7 @@
 					document: document,
 				},
 			});
-			console.log('data: ', data);
+			// console.log('data: ', data);
 
 			if (error.value) {
 				throw new Error(data.value.responseBody);

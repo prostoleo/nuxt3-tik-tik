@@ -108,7 +108,7 @@
 		try {
 			const user = await userStore.createOrGetUser(googleResponse);
 			const rawUser = toRaw(user);
-			console.log('rawUser: ', rawUser);
+			// console.log('rawUser: ', rawUser);
 
 			const { data, error } = await useFetch(`/api/auth`, {
 				method: 'POST',
@@ -116,7 +116,7 @@
 					user: rawUser,
 				},
 			});
-			console.log('data: ', data);
+			// console.log('data: ', data);
 
 			if (data.value.statusCode !== 200) {
 				throw new Error(`ошибка`);

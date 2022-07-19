@@ -227,7 +227,7 @@
 						likeData: likeData,
 					},
 				});
-				console.log('data: ', data);
+				// console.log('data: ', data);
 
 				post.value = { ...post.value, likes: data.value.body.likes };
 			}

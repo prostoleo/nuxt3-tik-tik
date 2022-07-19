@@ -33,7 +33,7 @@ export function useCookieUser() {
 	});
 
 	function setUserCookie(newVal) {
-		console.log('newVal: ', newVal);
+		// console.log('newVal: ', newVal);
 		// userCookie.value = JSON.stringify(newVal);
 		userCookie.value = newVal;
 	}

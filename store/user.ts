@@ -68,7 +68,7 @@ export const useUserStore = defineStore('user', {
 			// console.log('response: ', response);
 
 			const userData: IUserData = decodeCredential(response.credential);
-			console.log('userData: ', userData);
+			// console.log('userData: ', userData);
 
 			const { name, picture, sub } = userData;
 

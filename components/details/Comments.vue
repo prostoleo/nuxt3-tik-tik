@@ -131,7 +131,7 @@
 	const wrapperEl = ref<HTMLDivElement | null>(null);
 
 	function handleWrapperClick(event: Event) {
-		console.log('event.target: ', event.target);
+		// console.log('event.target: ', event.target);
 		if (
 			!event?.target?.matches('input') &&
 			!event?.target.matches('a') &&

@@ -93,7 +93,7 @@
 			profileId,
 		},
 	});
-	console.log('data: ', data);
+	// console.log('data: ', data);
 
 	const { user, userVideos, userLikedVideos } = data.value.body;
 	// console.log('userVideos: ', userVideos);
