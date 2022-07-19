@@ -42,7 +42,7 @@
 	const usersFetched = await userStore.fetchAllUsers();
 	// console.log('usersFetched: ', usersFetched);
 	users.value = userStore.getAllUsers;
-	console.log('users: ', users);
+	// console.log('users: ', users);
 
 	const indexesOfSelectedAccounts = ref([]);
 

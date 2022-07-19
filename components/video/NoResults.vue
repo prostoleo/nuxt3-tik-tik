@@ -5,7 +5,7 @@
 			}} -->
 			<span
 				class="mdi mdi-comment-off"
-				v-if="text.toLowerCase().includes('No comments yet'.toLowerCase())"
+				v-if="text.toLowerCase().includes(' comment')"
 			></span>
 			<span v-else class="mdi mdi-video-off"></span>
 		</p>

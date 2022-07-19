@@ -3,7 +3,10 @@
 		<div>
 			<div class="flex gap-3 p-2 cursor-pointer font-semibold rounded">
 				<div class="w-10 h-10 md:(w-16 h-16)">
-					<NuxtLink class="block w-full h-full" to="/">
+					<NuxtLink
+						class="block w-full h-full"
+						:to="`/profile/${post.postedBy._id}`"
+					>
 						<img
 							:src="post.postedBy.image"
 							class="block w-full h-full object-cover rounded-full aspect-square"
@@ -14,7 +17,7 @@
 					</NuxtLink>
 				</div>
 				<div>
-					<NuxtLink to="/">
+					<NuxtLink :to="`/profile/${post.postedBy._id}`">
 						<div class="flex items-center gap-2">
 							<p
 								class="flex gap-2 items-center font-bold text-primary md:(text-md)"

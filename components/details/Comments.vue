@@ -82,7 +82,7 @@
 					placeholder="add comment"
 				/>
 				<button
-					class="border-2 border-accent/70 px-2 rounded-lg transition-colors hover:(bg-accent/70 text-white)"
+					class="border-2 border-accent px-2 rounded-lg transition-colors hover:(bg-accent text-white)"
 					aria-label="submit comment"
 					@click="addComment"
 				>

@@ -132,7 +132,7 @@
 
 	async function uploadVideo() {
 		// try {
-		console.log('inputFileEl?.value: ', inputFileEl?.value);
+		// console.log('inputFileEl?.value: ', inputFileEl?.value);
 		// const selectedFile = event.target.files[0];
 		const selectedFile = inputFileEl?.value?.files[0];
 		const fileTypes = ['video/mp4', 'video/webm', 'video/ogg'];
