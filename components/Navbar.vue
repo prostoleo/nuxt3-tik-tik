@@ -10,7 +10,25 @@
 			</div>
 		</NuxtLink>
 		<!-- <i class="bi bi-archive"></i> -->
-		<div @click="handleLogout">search</div>
+		<div class="relative">
+			<form
+				class="absolute md:static top-10 -left-20 bg-white inline-flex items-center"
+				@submit.prevent="handleSearch"
+			>
+				<input
+					type="text"
+					v-model.trim="searchQuery"
+					class="bg-primary p-3 font-medium border-2 border-gray-100 rounded-lg focus:(border-accent/50 outline-transparent) md:(top-0)"
+					placeholder="Search accounts and videos"
+				/>
+				<button
+					aria-label="Search accounts and videos"
+					class="right-6 border-l-2 border-gray-300 pl-4 text-2xl text-gray-400"
+				>
+					<span class="mdi mdi-magnify"></span>
+				</button>
+			</form>
+		</div>
 
 		<div>
 			<template v-if="userComputed">
@@ -137,7 +155,16 @@
 		clearUserCookie();
 	}
 
-	function handleError(error: any) {}
+	// function handleError(error: any) {}
+	const searchQuery = ref('');
+
+	const router = useRouter();
+
+	function handleSearch() {
+		if (searchQuery.value.length > 0) {
+			router.push(`/search/${searchQuery.value}`);
+		}
+	}
 </script>
 
 <style lang="scss" scoped></style>

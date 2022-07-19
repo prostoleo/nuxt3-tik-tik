@@ -26,10 +26,6 @@
 						</div>
 					</NuxtLink>
 				</div>
-				<div v-if="!userProfile" class="px-2 py-4 hidden xl:(block)">
-					<p class="text-gray-400">Log in to like and comment on videos</p>
-					<div class="pr-4">Google login</div>
-				</div>
 
 				<SidebarDiscover />
 				<SidebarSuggestedAccounts />

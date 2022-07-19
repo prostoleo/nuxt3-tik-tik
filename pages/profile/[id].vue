@@ -31,6 +31,7 @@
 						'border-dark-400': selectedTab === ITab.Videos,
 						'text-gray-400': selectedTab !== ITab.Videos,
 					}"
+					:aria-label="`View videos of ${user.userName}`"
 					@click="handleTab(ITab.Videos)"
 				>
 					{{ ITab.Videos }}
@@ -41,13 +42,17 @@
 						'border-dark-400': selectedTab === ITab.Likes,
 						'text-gray-400': selectedTab !== ITab.Likes,
 					}"
+					:aria-label="`View liked videos of ${user.userName}`"
 					@click="handleTab(ITab.Likes)"
 				>
 					{{ ITab.Likes }}
 				</button>
 			</div>
 
-			<div class="flex gap-6 flex-wrap justify-center">
+			<div
+				class="flex gap-6 flex-wrap md:(justify-start)"
+				:class="{ '!justify-center': videoList.length === 0 }"
+			>
 				<div v-if="videoList.length > 0">
 					<VideoCard v-for="post in videoList" :key="post._id" :post="post">
 					</VideoCard>
