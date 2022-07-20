@@ -181,9 +181,9 @@
 			const userData = toRaw(userStore.getUser);
 			// console.log('userData: ', userData);
 
-			const document = {
+			const post = {
 				_type: 'post',
-				caption: caption.value,
+				caption: caption?.value,
 				video: {
 					_type: 'file',
 					asset: {
@@ -202,7 +202,7 @@
 			const { data, error } = await useFetch(`/api/post`, {
 				method: 'POST',
 				body: {
-					document: document,
+					post: post,
 				},
 			});
 			// console.log('data: ', data);

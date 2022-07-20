@@ -3,7 +3,7 @@ import { useSanityClient } from '~~/utils/sanityClient';
 export default defineEventHandler(async (event) => {
 	try {
 		const body = await useBody(event);
-		const { document } = body;
+		const { post } = body;
 		const config = useRuntimeConfig();
 
 		// const sanity = useSanity();
@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
 
 		const sanityClient = useSanityClient(config);
 
-		const res = await sanityClient.create(document);
+		const res = await sanityClient.create(post);
 		console.log('res: ', res);
 		// .then(() => res.status(200).json('Login success')))
 		return {
