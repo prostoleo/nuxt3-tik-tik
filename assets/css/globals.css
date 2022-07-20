@@ -46,3 +46,8 @@ img {
 		scrollbar-width: thin;
 	}
 }
+
+.g-btn-wrapper .api-loading {
+	user-select: all !important;
+	opacity: 1 !important;
+}

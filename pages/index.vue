@@ -21,7 +21,7 @@
 	import { allPostsQuery, topicPostsQuery } from '~~/utils/queries';
 
 	const route = useRoute();
-	console.log('route: ', route);
+	// console.log('route: ', route);
 	const topic = computed(() => route.query.topic);
 	// const topic = ref(route.query.topic);
 
@@ -50,10 +50,10 @@
 	{ data: Ref<IPost[]>; refresh: () => Promise<void> } = await useAsyncData(
 		'topicPost',
 		() => {
-			console.log(
+			/* console.log(
 				'topicPostsQuery(route?.query?.topic): ',
 				topicPostsQuery(route?.query?.topic)
-			);
+			); */
 			return sanity.fetch(topicPostsQuery(route?.query?.topic));
 		},
 		{
@@ -66,7 +66,7 @@
 		topic,
 		async (newVal, oldVal) => {
 			if (newVal && newVal !== oldVal) {
-				console.log('refreshTopic: ', refreshTopic);
+				// console.log('refreshTopic: ', refreshTopic);
 				await refreshTopic();
 
 				postsToShow.value = topicPosts.value;

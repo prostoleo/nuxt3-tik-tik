@@ -91,11 +91,19 @@
 	import Logo from '/tiktik-logo.png';
 	// console.log('GoogleLogin: ', GoogleLogin);
 
+	const googleLoginEl = ref(null);
 	onMounted(() => {
+		// console.log('googleLoginEl: ', googleLoginEl);
+		console.log('googleLoginEl.value.$el: ', googleLoginEl.value.$el);
+
+		/* nextTick(() => {
+			console.log('googleLoginEl: ', googleLoginEl);
+		}); */
 		if (process.client) {
-			const gBtnWrapper = document
+			/* const gBtnWrapper = document
 				.querySelector('.api-loading')
-				.classList.remove('api-loading');
+				.classList.remove('api-loading'); */
+			googleLoginEl.value.$el.classList.remove('api-loading');
 		}
 	});
 
