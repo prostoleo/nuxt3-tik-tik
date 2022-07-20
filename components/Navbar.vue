@@ -94,8 +94,8 @@
 	onMounted(() => {
 		if (process.client) {
 			const gBtnWrapper = document
-				?.querySelector('.api-loading')
-				?.classList?.remove('api-loading');
+				.querySelector('.api-loading')
+				.classList.remove('api-loading');
 		}
 	});
 
