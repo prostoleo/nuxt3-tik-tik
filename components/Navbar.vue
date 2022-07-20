@@ -92,9 +92,11 @@
 	// console.log('GoogleLogin: ', GoogleLogin);
 
 	onMounted(() => {
-		const gBtnWrapper = document
-			?.querySelector('.api-loading')
-			?.classList?.remove('api-loading');
+		if (process.client) {
+			const gBtnWrapper = document
+				?.querySelector('.api-loading')
+				?.classList?.remove('api-loading');
+		}
 	});
 
 	const config = useRuntimeConfig();
