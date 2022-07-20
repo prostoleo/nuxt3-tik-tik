@@ -61,14 +61,14 @@
 			</template>
 			<template v-else>
 				<div>
-					<ClientOnly>
+					<client-only>
 						<GoogleLogin
 							ref="googleLoginEl"
 							:clientId="config.public.GOOGLE_API_CLIENT_ID"
 							:callback="handleLogin"
 							:error="userStore.handleError"
 						/>
-					</ClientOnly>
+					</client-only>
 				</div>
 			</template>
 		</div>
