@@ -61,12 +61,14 @@
 			</template>
 			<template v-else>
 				<div>
-					<GoogleLogin
-						ref="googleLoginEl"
-						:clientId="config.public.GOOGLE_API_CLIENT_ID"
-						:callback="handleLogin"
-						:error="userStore.handleError"
-					/>
+					<ClientOnly>
+						<GoogleLogin
+							ref="googleLoginEl"
+							:clientId="config.public.GOOGLE_API_CLIENT_ID"
+							:callback="handleLogin"
+							:error="userStore.handleError"
+						/>
+					</ClientOnly>
 				</div>
 			</template>
 		</div>

@@ -108,6 +108,11 @@ export default defineNuxtConfig({
 
 	runtimeConfig: {
 		secretKey: '', // variable that can only be accessed on the server side
+		SANITY_ID: process.env.SANITY_ID, // variable that can also be accessed on the client side
+		// SANITY_DATASET: process.env.SANITY_DATASET, // variable that can also be accessed on the client side
+		SANITY_PUBLIC_TOKEN: process.env.SANITY_PUBLIC_TOKEN,
+		GOOGLE_API_CLIENT_ID: process.env.GOOGLE_API_CLIENT_ID,
+		USER_KEY: process.env.USER_KEY,
 		public: {
 			SANITY_ID: process.env.SANITY_ID, // variable that can also be accessed on the client side
 			// SANITY_DATASET: process.env.SANITY_DATASET, // variable that can also be accessed on the client side
