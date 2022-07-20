@@ -38,3 +38,11 @@ img {
 ::-webkit-scrollbar-track {
 	background-color: transparent;
 }
+
+/** для firefox  */
+@supports (scrollbar-color: red blue) {
+	* {
+		scrollbar-color: rgb(237, 237, 237) transparent;
+		scrollbar-width: thin;
+	}
+}
