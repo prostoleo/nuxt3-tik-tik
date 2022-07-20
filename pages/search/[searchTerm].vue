@@ -95,8 +95,8 @@
 	}
 
 	const route = useRoute();
-	const searchTerm: string = route.params.searchTerm;
-	console.log('searchTerm: ', searchTerm);
+	const searchTerm: any = route.params.searchTerm;
+	// console.log('searchTerm: ', searchTerm);
 	// console.log('profileId: ', profileId);
 	// console.log('videoId: ', videoId);
 	// const profilesQuery = singleUserQuery(profileId);
@@ -120,7 +120,7 @@
 	const searchedAccounts = userStore.getAllUsers.filter((user: IUser) =>
 		user.userName.toLowerCase().includes(searchTerm.toLowerCase())
 	);
-	console.log('searchedAccounts: ', searchedAccounts);
+	// console.log('searchedAccounts: ', searchedAccounts);
 
 	enum ITab {
 		IsAccounts = 'Accounts',
@@ -136,22 +136,6 @@
 		}
 		selectedTab.value = tabVal;
 	}
-
-	/* watch(
-		selectedTab,
-		(newVal, oldVal) => {
-			if (newVal === ITab.IsAccounts) {
-				videoList.value = userVideos;
-				return;
-			} else if (newVal === ITab.IsVideos) {
-				videoList.value = userLikedVideos;
-			}
-		},
-		{
-			immediate: true,
-			flush: 'pre',
-		}
-	); */
 </script>
 
 <style scoped></style>
