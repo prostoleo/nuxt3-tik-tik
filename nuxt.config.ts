@@ -99,9 +99,9 @@ export default defineNuxtConfig({
 		// '',
 	],
 
-	typescript: {
+/* 	typescript: {
 		typeCheck: true,
-	},
+	}, */
 
 	modules: ['@nuxtjs/sanity'],
 	buildModules: ['nuxt-windicss', '@pinia/nuxt'],

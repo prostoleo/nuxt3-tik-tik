@@ -2,7 +2,6 @@
 	<header
 		class="w-full flex justify-between items-center border-b-2 border-solid border-b-gray-200 py-2 px-4"
 	>
-		<!-- <div class="container mx-auto "> -->
 		<NuxtLink to="/">
 			<div class="w-24 md:(w-28)">
 				<!-- <img class="cursor-pointer max-w-full" src="/tiktik-logo.png" /> -->
@@ -31,7 +30,7 @@
 		</div>
 
 		<div>
-			<template v-if="userComputed">
+			<div v-if="userComputed">
 				<div class="flex gap-5 items-center md:(gap-10)">
 					<NuxtLink to="/upload">
 						<button
@@ -59,17 +58,20 @@
 
 					<!-- <img  :src="userStore.getUser.image" /> -->
 				</div>
-			</template>
-			<template v-else>
-				<div v-if="showGoogleLogin">
+			</div>
+			<div v-else-if="showGoogleLogin">
+				<!-- v-if="" -->
+				<!-- <div> -->
+				<ClientOnly>
 					<GoogleLogin
 						ref="googleLoginEl"
 						:clientId="config.public.GOOGLE_API_CLIENT_ID"
 						:callback="handleLogin"
 						:error="userStore.handleError"
 					/>
-				</div>
-			</template>
+				</ClientOnly>
+				<!-- </div> -->
+			</div>
 		</div>
 		<!-- <span class="material-symbols-outlined"></span> -->
 		<!-- </div> -->
@@ -150,7 +152,7 @@
 
 	const { getUserCookie, setUserCookie, clearUserCookie } = useCookieUser();
 	const userStore = useUserStore();
-	const userComputed = computed(() => userStore.getUser);
+	const userComputed = computed(() => userStore.getUser?._id);
 	const clientSanity = useSanityClient(config);
 
 	watch(
