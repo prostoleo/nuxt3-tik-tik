@@ -23,6 +23,7 @@
 	const route = useRoute();
 	// console.log('route: ', route);
 	const topic = computed(() => route.query.topic);
+	const fullPath = computed(() => route.fullPath);
 	// const topic = ref(route.query.topic);
 
 	const sanity = useSanity();
@@ -36,7 +37,7 @@
 		'allPosts',
 		() => sanity.fetch(allPostsQuery),
 		{
-			watch: [route?.fullPath],
+			watch: [fullPath],
 			initialCache: true,
 		}
 	);
@@ -57,7 +58,7 @@
 			return sanity.fetch(topicPostsQuery(route?.query?.topic));
 		},
 		{
-			watch: [route?.fullPath],
+			watch: [fullPath],
 			initialCache: true,
 		}
 	);

@@ -56,19 +56,18 @@
 					<button class="px-2" type="button" @click="handleLogout">
 						<span class="mdi mdi-logout text-red-400 text-2xl"></span>
 					</button>
+
 					<!-- <img  :src="userStore.getUser.image" /> -->
 				</div>
 			</template>
 			<template v-else>
-				<div>
-					<client-only>
-						<GoogleLogin
-							ref="googleLoginEl"
-							:clientId="config.public.GOOGLE_API_CLIENT_ID"
-							:callback="handleLogin"
-							:error="userStore.handleError"
-						/>
-					</client-only>
+				<div v-if="showGoogleLogin">
+					<GoogleLogin
+						ref="googleLoginEl"
+						:clientId="config.public.GOOGLE_API_CLIENT_ID"
+						:callback="handleLogin"
+						:error="userStore.handleError"
+					/>
 				</div>
 			</template>
 		</div>
@@ -84,32 +83,70 @@
 		useSanityClient,
 		// clientSanity as sanityClient,
 	} from '~/utils/sanityClient';
-	import {
-		GoogleLogin,
-		googleLogout,
-		decodeCredential,
-	} from 'vue3-google-login';
+	// import {
+	// 	GoogleLogin,
+	// 	googleLogout,
+	// 	decodeCredential,
+	// } from 'vue3-google-login';
 	// import  '*.png' from './index.d.ts';
 	import Logo from '/tiktik-logo.png';
+	let GoogleLogin = null;
+	let googleLogout = null;
+	let decodeCredential = null;
+
+	const showGoogleLogin = ref(false);
+	const config = useRuntimeConfig();
+
+	if (process.client) {
+		import('vue3-google-login').then((data) => {
+			// console.log('data: ', data);
+			const {
+				GoogleLogin: GoogleLoginLocal,
+				googleLogout: googleLogoutLocal,
+				decodeCredential: decodeCredentialLocal,
+			} = data;
+			// console.log('GoogleLoginLocal: ', GoogleLoginLocal);
+			// console.log('googleLogoutLocal: ', googleLogoutLocal);
+			// console.log('decodeCredentialLocal: ', decodeCredentialLocal);
+
+			GoogleLogin = GoogleLoginLocal;
+			googleLogout = googleLogoutLocal;
+			decodeCredential = decodeCredentialLocal;
+
+			showGoogleLogin.value = true;
+			console.log('showGoogleLogin.value: ', showGoogleLogin.value);
+		});
+	}
 	// console.log('GoogleLogin: ', GoogleLogin);
 
 	const googleLoginEl = ref(null);
 	onMounted(() => {
 		// console.log('googleLoginEl: ', googleLoginEl);
-		console.log('googleLoginEl.value.$el: ', googleLoginEl.value.$el);
-
+		// console.log('googleLoginEl.value.$el: ', googleLoginEl.value.$el);
 		/* nextTick(() => {
 			console.log('googleLoginEl: ', googleLoginEl);
 		}); */
 		if (process.client) {
-			/* const gBtnWrapper = document
-				.querySelector('.api-loading')
-				.classList.remove('api-loading'); */
-			googleLoginEl.value.$el.classList.remove('api-loading');
+			// const gBtnWrapper = document
+			// 	.querySelector('.api-loading')
+			// 	.classList.remove('api-loading');
+			console.log('googleLoginEl?.value: ', googleLoginEl?.value);
+			googleLoginEl?.value?.$el.classList.remove('api-loading');
 		}
 	});
 
-	const config = useRuntimeConfig();
+	watch(showGoogleLogin, () => {
+		if (process.client) {
+			console.log('GoogleLogin: ', GoogleLogin);
+			console.log('googleLogout: ', googleLogout);
+			console.log('decodeCredential: ', decodeCredential);
+			// const gBtnWrapper = document
+			// 	.querySelector('.api-loading')
+			// 	.classList.remove('api-loading');
+			console.log('googleLoginEl?.value: ', googleLoginEl?.value);
+			googleLoginEl?.value?.$el.classList.remove('api-loading');
+		}
+	});
 
 	const { getUserCookie, setUserCookie, clearUserCookie } = useCookieUser();
 	const userStore = useUserStore();
@@ -135,36 +172,40 @@
 	);
 
 	async function handleLogin(googleResponse: IGoogleResponse) {
-		try {
-			const user = await userStore.createOrGetUser(googleResponse);
-			const rawUser = toRaw(user);
-			// console.log('rawUser: ', rawUser);
+		if (process.client) {
+			try {
+				const user = await userStore.createOrGetUser(googleResponse);
+				const rawUser = toRaw(user);
+				// console.log('rawUser: ', rawUser);
 
-			const { data, error } = await useFetch(`/api/auth`, {
-				method: 'POST',
-				body: {
-					user: rawUser,
-				},
-			});
-			// console.log('data: ', data);
+				const { data, error } = await useFetch(`/api/auth`, {
+					method: 'POST',
+					body: {
+						user: rawUser,
+					},
+				});
+				// console.log('data: ', data);
 
-			if (data.value.statusCode !== 200) {
-				throw new Error(`ошибка`);
+				if (data.value.statusCode !== 200) {
+					throw new Error(`ошибка`);
+				}
+
+				// userStore.setIsLoginTrue();
+				setUserCookie(rawUser);
+			} catch (error) {
+				userStore.setIsLoginFalse();
+				// userStore.$state.isLogin = false;
 			}
-
-			// userStore.setIsLoginTrue();
-			setUserCookie(rawUser);
-		} catch (error) {
-			userStore.setIsLoginFalse();
-			// userStore.$state.isLogin = false;
 		}
 	}
 
 	async function handleLogout() {
-		await googleLogout();
+		if (process.client) {
+			await googleLogout();
 
-		userStore.clearUser();
-		clearUserCookie();
+			userStore.clearUser();
+			clearUserCookie();
+		}
 	}
 
 	// function handleError(error: any) {}
