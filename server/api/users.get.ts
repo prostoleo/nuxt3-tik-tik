@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
 		const sanityClient = useSanityClient(config);
 
 		const res = await sanityClient.fetch(usersQuery);
-		console.log('res: ', res);
+		// console.log('res: ', res);
 		// .then(() => res.status(200).json('Login success')))
 		return {
 			statusCode: 200,
