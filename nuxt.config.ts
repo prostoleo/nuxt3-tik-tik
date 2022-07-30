@@ -99,7 +99,7 @@ export default defineNuxtConfig({
 		// '',
 	],
 
-/* 	typescript: {
+	/* 	typescript: {
 		typeCheck: true,
 	}, */
 
